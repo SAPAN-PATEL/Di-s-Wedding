@@ -1,0 +1,6 @@
+{
+  "name": "Dhruv & Krishna Wedding Invitation",
+  "description": "A beautiful, premium, interactive Indian wedding invitation website for Dhruv & Krishna.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

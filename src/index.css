@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono&family=Alex+Brush&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-script: 'Great Vibes', cursive;
+  --font-brush: 'Alex Brush', cursive;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --color-gold: #c5a880;
+  --color-gold-light: #dfd3c3;
+  --color-pastel-pink: #fbeee6;
+  --color-pastel-green: #eef5ed;
+  --color-pastel-blue: #f0f7f7;
+  --color-pastel-cream: #faf5ef;
+}
+
+@layer utilities {
+  /* Soft continuous floating keyframes */
+  @keyframes softFloat {
+    0%, 100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-8px) rotate(2deg);
+    }
+  }
+
+  @keyframes softFloatReverse {
+    0%, 100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+      transform: translateY(8px) rotate(-2deg);
+    }
+  }
+
+  .animate-float {
+    animation: softFloat 6s ease-in-out infinite;
+  }
+
+  .animate-float-reverse {
+    animation: softFloatReverse 8s ease-in-out infinite;
+  }
+}
+
+/* Custom styles for scratch card canvas */
+.scratch-canvas {
+  touch-action: none;
+}
+
+/* Base style resets and scrolling */
+html {
+  scroll-behavior: smooth;
+  background-color: #faf7f4;
+  color: #333333;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #faf7f4;
+}
+::-webkit-scrollbar-thumb {
+  background: #c5a880;
+  border-radius: 3px;
+}
