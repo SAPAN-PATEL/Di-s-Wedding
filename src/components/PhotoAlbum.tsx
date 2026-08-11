@@ -10,7 +10,7 @@ import { ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
 const albumPhotos = [
   {
     id: 1,
-    url: 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?q=80&w=600&auto=format&fit=crop',
+    url: 'src/assets/images/Photo-1.JPG',
     title: 'The Pre-Wedding Shoot',
   },
   {

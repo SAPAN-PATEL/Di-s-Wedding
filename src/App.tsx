@@ -197,7 +197,7 @@ export default function App() {
               <div className="absolute inset-0 border border-[#c5a880]/30 rounded-t-full rounded-b-3xl m-2 pointer-events-none" />
               
               <img
-                src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=600&auto=format&fit=crop"
+                src="src/assets/images/Photo-1.JPG"
                 alt="Dhruv & Krishna"
                 referrerPolicy="no-referrer"
                 className="w-full h-full object-cover grayscale-[8%] brightness-[102%] hover:scale-105 transition-transform duration-700"
