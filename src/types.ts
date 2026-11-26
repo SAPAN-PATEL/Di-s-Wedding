@@ -10,6 +10,8 @@ export interface PolaroidItem {
   desc: string;
   image: string; // URL
   caption: string; // cursive text
+  year?: string;
+  date?: string;
 }
 
 export interface CeremonyItem {
@@ -20,7 +22,9 @@ export interface CeremonyItem {
   dateLabel: string; // "Sunday, 17 May 2026"
   timeLabel: string; // "4:44 AM Onwards"
   theme: string; // "Theme: Colorful Pop"
+  attireTheme?: string; // "Sage Green & Pastels", etc.
   subTitle?: string; // "Mystic & Magic", etc.
+  formattedDate?: string; // "Wednesday | 27 | May 2026"
   illustration: string; // custom SVGs or images
   bgColor: string; // e.g., "bg-pastel-pink"
   borderColor: string;
@@ -28,6 +32,7 @@ export interface CeremonyItem {
   mapUrl: string; // Link to OpenMaps or google maps
   venueName: string;
   venueAddress: string;
+  schedule?: TimelineEvent[];
 }
 
 export interface TimelineEvent {
@@ -42,3 +47,15 @@ export interface RsvpData {
   eventsJoined: string[]; // List of title keys
   blessings: string;
 }
+
+export interface WishItem {
+  id: string;
+  name: string;
+  relationship?: string;
+  message: string;
+  emoji: string;
+  timestamp: string;
+  likes: number;
+  isNew?: boolean;
+}
+

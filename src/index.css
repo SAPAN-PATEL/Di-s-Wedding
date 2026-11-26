@@ -51,6 +51,11 @@
 }
 
 /* Base style resets and scrolling */
+html,
+body {
+  overflow-x: clip;
+}
+
 html {
   scroll-behavior: smooth;
   background-color: #faf7f4;
@@ -67,3 +72,28 @@ html {
   background: #c5a880;
   border-radius: 3px;
 }
+
+/* Pill-shaped horizontal scrollbar matching rounded-full day selector container */
+.day-selector-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #c5a880 transparent;
+}
+.day-selector-scroll::-webkit-scrollbar {
+  height: 5px;
+}
+.day-selector-scroll::-webkit-scrollbar-track {
+  background: rgba(234, 224, 210, 0.45);
+  border-radius: 9999px;
+  margin: 0 20px;
+}
+.day-selector-scroll::-webkit-scrollbar-thumb {
+  background: #c5a880;
+  border-radius: 9999px;
+}
+.day-selector-scroll::-webkit-scrollbar-thumb:hover {
+  background: #a88a62;
+}
+.day-selector-scroll::-webkit-scrollbar-corner {
+  background: transparent;
+}
+

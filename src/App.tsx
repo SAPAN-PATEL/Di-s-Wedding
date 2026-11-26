@@ -92,12 +92,13 @@ export default function App() {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#faf7f4] flex justify-center items-start overflow-x-hidden font-sans selection:bg-[#dfd3c3]/70 selection:text-[#511316]">
+    <div className="relative min-h-screen bg-[#faf7f4] flex justify-center items-start overflow-x-clip font-sans selection:bg-[#dfd3c3]/70 selection:text-[#511316]">
       {/* Background soft textures */}
       <div className="absolute inset-0 bg-[#f7f2ed] opacity-35 bg-[radial-gradient(#eedfc9_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
 
       {/* Real-time Wedding MP3 Music Player (Floating Controller) */}
       <AudioPlayer playRequested={playRequested} isOpened={isOpened} />
+
 
       {/* 1. Envelope opening screen */}
       <AnimatePresence>
@@ -151,20 +152,35 @@ export default function App() {
       {/* 2. Main Page Layout Wrapper */}
       {isOpened && (
         <motion.div
-          initial={{ opacity: 0, y: 100 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
-          className="relative w-full max-w-[480px] bg-white min-h-screen shadow-[0_0_60px_rgba(138,98,63,0.18)] border-x border-[#eedfc9]/40 pb-20 flex flex-col justify-start"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
+          className="relative w-full max-w-[480px] bg-white min-h-screen shadow-[0_0_60px_rgba(138,98,63,0.18)] border-x border-[#eedfc9]/40 pb-20 flex flex-col justify-start z-10"
           id="main-invitation-container"
         >
           {/* Audio Player float sits in the active document layer, managed globally */}
 
           {/* ============ HERO SECTION ============ */}
           <header className="relative w-full text-center px-6 pt-16 pb-12 bg-gradient-to-b from-[#fbfbf8] to-white" id="hero-header">
-            {/* Elegant Hindu "Om" Symbol at the top */}
+            {/* Elegant Hindu "Om" Symbol & Lord Ganesha at the top */}
             <div className="text-center mb-6">
-              <span className="inline-block text-[#c5a880] text-3xl font-serif" id="om-symbol">ॐ</span>
-              <div className="w-16 h-[1.5px] bg-gradient-to-r from-transparent via-[#c5a880]/50 to-transparent mx-auto mt-2" />
+              <div className="inline-flex items-center justify-center gap-3">
+                
+                <img
+                  src="/assets/aistudio/Golden_Om_Mandala_Emblem-removebg-preview_4bafa58b.png"
+                  alt="Om Mandala"
+                  className="w-10 h-10 object-contain drop-shadow-sm select-none"
+                  id="om-symbol"
+                />
+                <div className="w-[1px] h-6 bg-[#c5a880]/30" />
+                <img
+                  src="/assets/aistudio/Golden_Ganesha_on_Black_8136df1c.png"
+                  alt="Lord Ganesha"
+                  className="w-10 h-10 object-contain drop-shadow-sm select-none"
+                  id="ganesha-hero-img"
+                />
+              </div>
+              <div className="w-20 h-[1.5px] bg-gradient-to-r from-transparent via-[#c5a880]/50 to-transparent mx-auto mt-2.5" />
             </div>
 
             {/* Wedding Quote header */}
@@ -209,14 +225,10 @@ export default function App() {
 
             {/* Wedding description intro */}
             <div className="max-w-xs mx-auto mt-10">
-              <p className="font-serif text-sm text-[#4a3625] leading-relaxed">
+              <p className="font-serif italic no-underline text-sm text-[#4a3625] leading-relaxed">
                 We are tying the knot! Join us as we celebrate our love and new journey together.
               </p>
-              <div className="flex justify-center gap-1.5 items-center mt-3 text-[#c5a880]">
-                <Sparkles className="w-3.5 h-3.5" />
-                <span className="font-sans text-[10px] uppercase font-bold tracking-widest">Check out wedding details</span>
-                <Sparkles className="w-3.5 h-3.5" />
-              </div>
+              
             </div>
 
             {/* Scroll Indicator */}
@@ -240,12 +252,13 @@ export default function App() {
           <section className="relative w-full text-center px-6 py-12 bg-white overflow-hidden" id="save-the-date-section">
             {allScratched && <FlowerSprinkler />}
             <span className="font-sans text-[10px] tracking-[0.25em] uppercase text-[#c5a880] font-semibold relative z-10">
-              The Wedding Announcement
+              The Wedding Announcement <br />
             </span>
+
             <h2 className="font-script text-5xl text-[#511316] mt-1 mb-2 relative z-10">
-              Save the Date
+             <br /> Save the Date
             </h2>
-            <p className="font-sans text-xs text-gray-400 mb-8 max-w-[280px] mx-auto leading-relaxed relative z-10">
+            <p className="font-serif italic text-xs text-gray-400 mb-8 max-w-[280px] mx-auto leading-relaxed relative z-10">
               Scratch cards below with your touch or cursor to reveal our celestial wedding date
             </p>
 
@@ -255,26 +268,6 @@ export default function App() {
               <ScratchCard label="DAY" value="02" subText="♥ scratch" onScratched={() => setScratched(p => ({ ...p, DAY: true }))} />
               <ScratchCard label="YEAR" value="2027" subText="♥ scratch" onScratched={() => setScratched(p => ({ ...p, YEAR: true }))} />
             </div>
-
-            {!allScratched && (
-              <span className="font-sans text-[9px] uppercase tracking-wider text-[#c5a880] block mt-5 animate-pulse relative z-10">
-                ✦ Scratch all 3 cards to unlock countdown ✦
-              </span>
-            )}
-
-            {allScratched && (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="mt-6 flex flex-col items-center justify-center gap-1 relative z-10"
-                id="revealed-banner"
-              >
-                <div className="flex items-center gap-2 text-[#2e4d31] font-semibold text-xs py-1.5 px-3 bg-[#eef5ed] border border-[#cfe2cf]/60 rounded-full shadow-sm">
-                  <Sparkles className="w-3.5 h-3.5 text-[#eab561] animate-bounce" />
-                  <span>February 2, 2027 — Tuesday Revealed!</span>
-                </div>
-              </motion.div>
-            )}
           </section>
 
           <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[#eae0d2]/70 to-transparent" />
@@ -352,10 +345,9 @@ export default function App() {
           {/* ============ PHOTO ALBUM SLIDER SECTION ============ */}
           <PhotoAlbum />
 
-          <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[#eae0d2]/70 to-transparent" />
-
-          {/* ============ RSVP SECTION ============ */}
-          <RsvpForm onSuccess={handleRsvpSuccess} />
+          {/* ============ RSVP SECTION (Commented out) ============ */}
+          {/* <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[#eae0d2]/70 to-transparent" /> */}
+          {/* <RsvpForm onSuccess={handleRsvpSuccess} /> */}
 
           {/* ============ BLESSINGS & FOOTER CARD SCREEN ============ */}
           <footer className="px-5 mt-6 pb-8 text-center" id="invitation-footer">
@@ -365,26 +357,19 @@ export default function App() {
 
               {/* Om and Lord Ganesha Auspicious Symbols */}
               <div className="flex items-center justify-center gap-4 mb-4" id="footer-auspicious-symbols">
-                <span className="text-[#dfd3c3] text-4xl font-serif select-none" id="footer-om-symbol">ॐ</span>
+                <img
+                  src="/assets/aistudio/Golden_Om_Mandala_Emblem-removebg-preview_4bafa58b.png"
+                  alt="Om Mandala"
+                  className="w-10 h-10 object-contain drop-shadow-sm select-none brightness-110"
+                  id="footer-om-symbol"
+                />
                 <div className="w-[1px] h-6 bg-[#dfd3c3]/20" />
                 <div className="flex flex-col items-center" id="footer-ganesha-symbol" title="Lord Ganesha">
-                  <svg className="w-10 h-10 text-[#dfd3c3]" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    {/* Crown / Mukut */}
-                    <path d="M 38 18 L 50 5 L 62 18 Z" />
-                    <line x1="42" y1="18" x2="58" y2="18" />
-                    {/* Head / Forehead */}
-                    <path d="M 36 28 C 45 22, 55 22, 64 28" />
-                    {/* Ears */}
-                    <path d="M 36 28 C 22 30, 22 55, 40 50" />
-                    <path d="M 64 28 C 78 30, 78 55, 60 50" />
-                    {/* Trunk curving beautifully down and to the right */}
-                    <path d="M 50 24 C 50 36, 45 52, 55 60 C 62 65, 70 58, 68 50" />
-                    {/* Tilak */}
-                    <path d="M 48 20 C 48 16, 52 16, 52 20 Z" fill="currentColor" />
-                    <line x1="45" y1="21" x2="55" y2="21" strokeWidth="1.5" />
-                    {/* Modak (Sweet) */}
-                    <circle cx="70" cy="48" r="3" fill="currentColor" />
-                  </svg>
+                  <img
+                    src="/assets/aistudio/Golden_Ganesha_on_Black_8136df1c.png"
+                    alt="Lord Ganesha"
+                    className="w-10 h-10 object-contain drop-shadow-sm select-none"
+                  />
                 </div>
               </div>
 
@@ -404,10 +389,7 @@ export default function App() {
               
               <div className="w-12 h-[1px] bg-[#dfd3c3]/20 mx-auto my-3" />
 
-              {/* Credits signature */}
-              <p className="font-mono text-[9px] uppercase tracking-widest text-[#dfd3c3]/50 mt-4 leading-normal">
-                MADE WITH ♥ BY @INVITEVIBES_
-              </p>
+              
             </div>
           </footer>
         </motion.div>

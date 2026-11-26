@@ -3,40 +3,41 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { useState, useEffect } from 'react';
+import { motion } from 'motion/react';
 import { ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
 
 const albumPhotos = [
   {
     id: 1,
-    url: 'src/assets/images/Photo-1.JPG',
+    url: 'src/assets/images/4.jpeg',
     title: 'The Pre-Wedding Shoot',
   },
   {
     id: 2,
-    url: 'https://images.unsplash.com/photo-1604017011826-d3b4c23f8914?q=80&w=600&auto=format&fit=crop',
+    url: 'src/assets/images/1.jpeg',
     title: 'Elegance & Tradition',
   },
   {
     id: 3,
-    url: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=600&auto=format&fit=crop',
+    url: 'src/assets/images/13.jpeg',
     title: 'Laughter & Joy',
   },
   {
     id: 4,
-    url: 'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=600&auto=format&fit=crop',
+    url: 'src/assets/images/16.jpeg',
     title: 'The Promises We Keep',
   },
   {
     id: 5,
-    url: 'https://images.unsplash.com/photo-1532712938310-34cb3982ef74?q=80&w=600&auto=format&fit=crop',
+    url: 'src/assets/images/7.jpeg',
     title: 'In To The Sunset',
   },
 ];
 
 export default function PhotoAlbum() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   const handleNext = () => {
     setActiveIndex((prev) => (prev + 1) % albumPhotos.length);
@@ -45,6 +46,15 @@ export default function PhotoAlbum() {
   const handlePrev = () => {
     setActiveIndex((prev) => (prev - 1 + albumPhotos.length) % albumPhotos.length);
   };
+
+  // Automatically shuffle cards every 3 seconds unless hovered/touched
+  useEffect(() => {
+    if (isPaused) return;
+    const timer = window.setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % albumPhotos.length);
+    }, 2000);
+    return () => window.clearInterval(timer);
+  }, [isPaused, activeIndex]);
 
   return (
     <section className="w-full max-w-[480px] mx-auto px-5 py-12 text-center" id="photo-album-section">
@@ -62,7 +72,14 @@ export default function PhotoAlbum() {
       </div>
 
       {/* Carousel Wrapper */}
-      <div className="relative h-[300px] w-full flex items-center justify-center overflow-hidden" id="carousel-viewport">
+      <div
+        className="relative h-[300px] w-full flex items-center justify-center overflow-hidden"
+        id="carousel-viewport"
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+        onTouchStart={() => setIsPaused(true)}
+        onTouchEnd={() => setIsPaused(false)}
+      >
         <div className="absolute inset-x-0 flex items-center justify-center gap-1 transition-all">
           {albumPhotos.map((photo, index) => {
             // Calculate relative offset representing circular arrangement
@@ -73,18 +90,15 @@ export default function PhotoAlbum() {
             if (!isVisible) return null;
 
             // Determine classes & scales for overlaps
-            let positionClasses = 'scale-100 z-20 opacity-100';
             let rotation = 0;
             let blurClass = 'blur-0';
 
             if (offset === 1) {
               // Right Card
-              positionClasses = 'translate-x-[110px] scale-80 z-10 opacity-40';
               rotation = 6;
               blurClass = 'blur-[2px]';
             } else if (offset === albumPhotos.length - 1) {
               // Left Card
-              positionClasses = '-translate-x-[110px] scale-80 z-10 opacity-40';
               rotation = -6;
               blurClass = 'blur-[2px]';
             }
@@ -92,8 +106,8 @@ export default function PhotoAlbum() {
             return (
               <motion.div
                 key={photo.id}
-                style={{ rotate: rotation }}
                 animate={{
+                  rotate: rotation,
                   scale: offset === 0 ? 1 : 0.85,
                   x: offset === 0 ? 0 : offset === 1 ? 120 : -120,
                   opacity: offset === 0 ? 1 : 0.45,

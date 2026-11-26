@@ -46,7 +46,7 @@ export default function Envelope({ onOpened, onPlayAudio }: EnvelopeProps) {
           <motion.div
             initial={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 1.1, y: -50 }}
-            transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
+            transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
             className="relative w-full max-w-[420px] aspect-[3/4] flex flex-col justify-between items-center p-8 rounded-3xl bg-[#80141a] border-4 border-[#c5a880]/30 shadow-[0_20px_50px_rgba(0,0,0,0.6)]"
             id="envelope-container"
           >
@@ -92,7 +92,6 @@ export default function Envelope({ onOpened, onPlayAudio }: EnvelopeProps) {
                   transition: { duration: 0.8, ease: 'backIn' } 
                 } : { y: 0 }}
                 className="relative z-10 w-36 h-36 flex items-center justify-center rounded-full bg-gradient-to-br from-[#dfc8a5] via-[#c5a880] to-[#99794e] font-serif font-bold text-3xl text-[#511316] shadow-[0_10px_25px_rgba(0,0,0,0.5),inset_0_2px_4px_rgba(255,255,255,0.4),inset_0_-2px_4px_rgba(0,0,0,0.4)] cursor-pointer active:brightness-95 border border-[#dfc8a5]"
-                style={{ transformStyle: 'preserve-3d' }}
                 id="wax-seal"
               >
                 {/* Traditional Wax Seal Texture Details */}
